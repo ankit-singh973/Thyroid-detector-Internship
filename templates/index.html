@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <title>Thyroid Detection</title>
+    <style>
+        body {
+            background-color: rgb(541, 129, 123);
+            color: rgb(10, 5, 5);
+            text-align: center;
+            padding-right: 90px;
+            font-family: Roboto, sans-serif;
+            font-size: 20px;
+        }
+        .banner {
+            position: relative;
+            height: 380px;
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoGu43I5JdP_y2YTXS_QobRhRPeymZSjnqDA&usqp=CAU");
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        h1 {
+            font-size: 26px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 5%;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input {
+            font-size: 14pt;
+            height: 20px;
+            width: 200px;
+            margin-bottom: 1%;
+            padding: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16pt;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18pt;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner"></div>
+    <h1><u>Thyroid Detection</u></h1>
+    <form action="{{ url_for('predict') }}" method="post">
+        <label for="age">Age</label>
+        <input type="number" class="form-control" name="age" id="age" min="1" max="100" placeholder="(1, 100)" step="any" required><br>
+
+        <label for="sex">Sex</label>
+        <input type="number" class="form-control" name="sex" id="sex" min="0" max="1" placeholder="Male - 1, Female - 0" required><br>
+
+        <label for="onthyroxine">On Thyroxine</label>
+        <input type="number" class="form-control" name="onthyroxine" id="onthyroxine" min="0" max="1" placeholder="(0, 1)" required><br>
+
+        <label for="sick">Sick</label>
+        <input type="number" class="form-control" name="sick" id="sick" min="0" max="1" placeholder="Yes - 1, No - 0" required><br>
+
+        <label for="queryhypothyroid">Query Hypothyroid</label>
+        <input type="number" class="form-control" name="queryhypothyroid" id="queryhypothyroid" min="0" max="1" placeholder="Yes - 1, No - 0" required><br>
+
+        <label for="psych">Psychological Symptoms</label>
+        <input type="number" class="form-control" name="psych" id="psych" min="0" max="1" placeholder="Yes - 1, No - 0" required><br>
+
+        <label for="T3">T3 Level</label>
+        <input type="number" class="form-control" name="T3" id="T3" min="0.05" max="10.6" placeholder="(0.05, 10.6)" step="any" required><br>
+
+        <label for="TT4">TT4 Level</label>
+        <input type="number" class="form-control" name="TT4" id="TT4" min="3.0" max="431" placeholder="(3.0, 431)" step="any" required><br>
+
+        <label for="FTI">Free Thyroxine Index (FTI)</label>
+        <input type="number" class="form-control" name="FTI" id="FTI" min="2.0" max="395.0" placeholder="(2.0, 395.0)" step="any" required><br>
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+    {% if prediction_text %}
+        <div class="result">
+            <h3><mark>{{ prediction_text }}</mark></h3>
+        </div>
+    {% endif %}
+</body>
+</html>
