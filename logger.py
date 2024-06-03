@@ -2,7 +2,7 @@ import os
 import logging
 
 # Create log directory if it doesn't exist
-log_dir = 'log'
+log_dir = 'prediction_log'
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 

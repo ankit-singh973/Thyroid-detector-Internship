@@ -11,7 +11,7 @@ app = Flask(__name__)
 logger = get_logger()
 
 # Load the model from the file
-model_path = 'notebook/final_model.pkl'
+model_path = 'models/final_model.pkl'
 try:
     with open(model_path, 'rb') as file:
         pickled_model = pickle.load(file)
